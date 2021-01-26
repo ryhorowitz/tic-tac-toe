@@ -16,10 +16,6 @@ the button that resets the game
 /*
 Control: 
 "Accepts input, converts its input to commands for the model or view."
-
 if player 1 clicks a square trigger something to update the model
 What are my options here???
-
-if player clicks on the reset button then???? native DOM methods
-
 */

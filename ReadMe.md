@@ -51,7 +51,7 @@ I could be lazy and hard code a board in the index.html
 the button that resets the game
 
 ***Control:***
-"Accepts input, converts its imput to commands for the model or view."
+"Accepts input, converts its input to commands for the model or view."
 
 event handlers, only native DOM methods
 if player 1 clicks

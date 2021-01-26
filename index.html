@@ -2,10 +2,10 @@
 <html>
   <head>
     <style>
-      table#gameboard {
+      table.gameboard {
         border-collapse: collapse;
       }
-      table#gameboard tr td { 
+      table.gameboard tr td { 
         height:75px;
         width: 75px;
         padding: 0px;
@@ -21,7 +21,7 @@
   
   <body>
     <h1>Welcome To Tic-Tac-Toe</h1>
-    <table id="gameboard">
+    <table class="gameboard">
       <tr>
         <td id='1'>X</td>
         <td id='2'>X</td>
@@ -40,7 +40,7 @@
     </table>
     <br>
     <br>
-    <input type="reset" value="Restart"> 
+    <button id="restart" onclick=location.reload(true)>Restart</button>
     <script type="text/javascript" src="app.js"></script>
   </body>
 </html>
