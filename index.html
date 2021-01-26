@@ -1,6 +1,43 @@
-`What are the core components of an HTML file?
-doctype
-HTML
-head
-body
-scripts: app.js
+<!doctype html>
+<html>
+  <head>
+    <style>
+      table#gameboard {
+        border-collapse: collapse;
+      }
+      table#gameboard tr td { 
+        height:75px;
+        width: 75px;
+        padding: 0px;
+        border-spacing: 0;
+        border-style: solid;
+      }
+
+    </style>
+    <title>Ry's Tic-Tac-Toe</title>
+  </head>
+  
+  <body>
+    <h1>Welcome To Tic-Tac-Toe</h1>
+    <table id="gameboard">
+      <tr>
+        <td id='1'></td>
+        <td id='2'></td>
+        <td id='3'></td>
+      </tr>
+      <tr>
+        <td id='4'></td>
+        <td id='5'></td>
+        <td id='6'></td>
+      </tr>
+      <tr>
+        <td id='7'></td>
+        <td id='8'></td>
+        <td id='9'></td>
+      </tr>
+    </table>
+    <br>
+    <br>
+    <script type="text/javascript" src="app.js"></script>
+  </body>
+</html>
