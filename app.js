@@ -9,8 +9,10 @@ const squares = Array.from(document.getElementsByTagName('td'));
 const allXs = (value) => value === 'X';
 const allYs = (value) => value === 'Y';
 
-const winningScenarios = [[1,2,3]]; //, [4,5,6], [7,8,9], [1,4,7], 
-                          //[2,5,8], [3,6,9], [1,5,9], [3,5,7]];
+const winningScenarios = [[1,2,3], [4,5,6], [7,8,9], [1,4,7], 
+                          [2,5,8], [3,6,9], [1,5,9], [3,5,7]];
+
+//const boardIsFull = (squares) => squares.includes("") ? false : true;
 
 const updateSquare = (square) => {
   if (square.innerHTML === '') {
@@ -28,37 +30,30 @@ const updateSquare = (square) => {
 const determineEndGame = () => {
   //win
   // if three squares have the same value in a horizontal, vertical, diagonal row;
-  let comboToCompare = [];
-  let idsAndValues = [];
+  var comboToCompare = [];
+  let squareValues = [];
   squares.forEach( (square) => {
     let letter = square.innerText;
-    idsAndValues.push(letter);
+    squareValues.push(letter);
   }); 
-  console.log('ids and Values objs Array', idsAndValues);
+  console.log('ids and Values Array', squareValues);
   for (winningCombo of winningScenarios) { //[1,2,3]
-    
     for (var i = 0; i<winningCombo.length; i++) {
-      comboToCompare.push(idsAndValues[i])
+      comboToCompare.push(squareValues[i])
     };
+    debugger; //I AM NOT LOOPING CORRECTLY
     console.log('comboToCompare', comboToCompare);
     if (comboToCompare.every(allXs)) {
       alert(`Winner Winner Chicken Dinner! Player 1 wins`)
     } else if (comboToCompare.every(allYs)) {   
       alert(`Winner Winner Chicken Dinner! Player 2 wins`)
-    } else if (`the board is full`, false){
+    } else if (!squareValues.includes('')) {
       alert(`It's a draw`)
+      break
     } else {
       return;
     };
   };
-
-  //else check for tie 
-    //if all the squares have a value 
-      //then its a tie
-      // alert It;s a tie. If you'd like to play again please hit the reset button 
-};
-const isBoardFull = () => {
-
 };
 /****View****/
 
