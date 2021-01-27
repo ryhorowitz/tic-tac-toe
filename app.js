@@ -65,7 +65,7 @@ const displayWhoseTurnItIs = (currentPlayer) => {
 
   whoseTurn.innerHTML = 'It\'s ' + displayPlayer + '\'s turn';
 }
-const emptySquares = () => {
+const emptySquares = () => {  // is this view???
   squares.forEach( square => {
     square.innerHTML = '';
   });
@@ -79,10 +79,10 @@ const board = document.querySelector(".gameboard")
     setTimeout( () => determineEndGame() ,500);
   });
 
-const resetButton = document.querySelector("#restart")
+let resetButton = document.querySelector("#restart")
   .addEventListener("click", event => {
     emptySquares();
-    
+    currentPlayer = player1;
     console.log('button was clicked');
   });
 
