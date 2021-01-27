@@ -1,23 +1,33 @@
 console.log('Welcome!');
-//MVC Framework mock up
-/* 
-Model: 
-the functions and methods definitions.
-Should manage App state, even if not using react.*/
-//update board function
+/***Model***/ 
+
+const player1 = 'X', player2 = 'O';
+var currentPlayer = player1;
+var playerOnDeck = player2;
+
 const updateSquare = (square) => {
   if (square.innerHTML === '') {
-    return square.innerHTML = 'X';
+    square.innerHTML = currentPlayer;
+    [currentPlayer, playerOnDeck] = [playerOnDeck, currentPlayer];
+  } else if (square.innerHTML !== '') {
+    alert('This square has been CLAIMED!!!\nPlease select an empty square.');
+    return;
   };
-  
+  // end game scenarios win/tie
+  console.log('square.innerHTML', square.innerHTML);
+  displayWhoseTurnItIs(currentPlayer);
 };
-/*
-View: 
-At the Bare minimum a tic-tac-toe board and a button
-im really hung up about implementing the board
-the button that resets the game
-*/
+/****View****/
 
+const displayWhoseTurnItIs = (currentPlayer) => {
+  //select id"whose_turn"
+  let whoseTurn = document.querySelector('#whose_turn')
+  // set innerHTML to currentPlayer
+  let displayPlayer;
+  currentPlayer === player1 ? displayPlayer = 'Player 1' : displayPlayer = 'Player 2';
+
+  whoseTurn.innerHTML = 'It\'s ' + displayPlayer + '\'s turn';
+}
 
 /*
 Control: 
