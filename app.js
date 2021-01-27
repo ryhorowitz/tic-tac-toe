@@ -7,7 +7,7 @@ var playerOnDeck = player2;
 
 const squares = Array.from(document.getElementsByTagName('td'));
 const allXs = (value) => value === 'X';
-const allYs = (value) => value === 'Y';
+const allOs = (value) => value === 'O';
 
 const winningScenarios = [[1,2,3], [4,5,6], [7,8,9], [1,4,7], 
                           [2,5,8], [3,6,9], [1,5,9], [3,5,7]];
@@ -30,36 +30,39 @@ const updateSquare = (square) => {
 const determineEndGame = () => {
   //win
   // if three squares have the same value in a horizontal, vertical, diagonal row;
-  var comboToCompare = [];
   let squareValues = [];
-  squares.forEach( (square) => {
-    let letter = square.innerText;
-    squareValues.push(letter);
+  squares.forEach( (square) => {   //{innertext: 'X'}
+  let letter = square.innerText; //'X'
+  squareValues.push(letter); //['X', 'X', 'X', 'O', '', 'O', 'X', '', 'O']
   }); 
-  console.log('ids and Values Array', squareValues);
-  for (winningCombo of winningScenarios) { //[1,2,3]
-    for (var i = 0; i<winningCombo.length; i++) {
-      comboToCompare.push(squareValues[i])
+console.log('SquareValues Array', squareValues);
+  for (winningCombo of winningScenarios) { //[1,2,3] |[1,5,9]|
+    var comboToCompare = []; //scope issue
+    for (var i = 0; i < winningCombo.length; i++) { // 0, 1, 2| 0, 1, 2|
+      let currentPosition = winningCombo[i] - 1;
+      let valueToCompare = squareValues[currentPosition];
+      comboToCompare.push(valueToCompare); //['X', 'X', 'X', 'X', 'X', 'X']
     };
-    debugger; //I AM NOT LOOPING CORRECTLY
-    console.log('comboToCompare', comboToCompare);
-    if (comboToCompare.every(allXs)) {
-      alert(`Winner Winner Chicken Dinner! Player 1 wins`)
-    } else if (comboToCompare.every(allYs)) {   
-      alert(`Winner Winner Chicken Dinner! Player 2 wins`)
-    } else if (!squareValues.includes('')) {
-      alert(`It's a draw`)
-      break
-    } else {
+    if (comboToCompare.every(allXs)) { //[X, X, X]
+      alert(`Winner Winner Chicken Dinner! Player 1 wins`);
       return;
+    } else if (comboToCompare.every(allOs)) {
+      alert(`Winner Winner Chicken Dinner! Player 2 wins`);
+      return;
+    } else {
+      continue;
     };
+  };
+  if (!squareValues.includes('')) {
+    alert(`It's a draw`);
+    return;
   };
 };
 /****View****/
 
 const displayWhoseTurnItIs = (currentPlayer) => {
   //select id"whose_turn"
-  let whoseTurn = document.querySelector('#whose_turn')
+  let whoseTurn = document.querySelector('#whose_turn');
   // set innerHTML to currentPlayer
   let displayPlayer;
   currentPlayer === player1 ? displayPlayer = 'Player 1' : displayPlayer = 'Player 2';
@@ -79,4 +82,4 @@ const board = document.querySelector(".gameboard")
     const square = event.target;
     updateSquare(square);
     determineEndGame();
-  })
+  });
