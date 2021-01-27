@@ -65,17 +65,24 @@ const displayWhoseTurnItIs = (currentPlayer) => {
 
   whoseTurn.innerHTML = 'It\'s ' + displayPlayer + '\'s turn';
 }
+const emptySquares = () => {
+  squares.forEach( square => {
+    square.innerHTML = '';
+  });
+};
+/***Control:***/
 
-/*
-Control: 
-"Accepts input, converts its input to commands for the model or view."
-if player 1 clicks a square trigger something to update the model
-What are my options here???
-*/
-//eventListeners for squares for each <td> tag
 const board = document.querySelector(".gameboard")
   .addEventListener("click", (event)=> {
     const square = event.target;
     updateSquare(square);
-    setTimeout( () => determineEndGame() , 500);
+    setTimeout( () => determineEndGame() ,500);
   });
+
+const resetButton = document.querySelector("#restart")
+  .addEventListener("click", event => {
+    emptySquares();
+    
+    console.log('button was clicked');
+  });
+
