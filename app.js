@@ -5,6 +5,13 @@ const player1 = 'X', player2 = 'O';
 var currentPlayer = player1;
 var playerOnDeck = player2;
 
+const squares = Array.from(document.getElementsByTagName('td'));
+const allXs = (value) => value === 'X';
+const allYs = (value) => value === 'Y';
+
+const winningScenarios = [[1,2,3]]; //, [4,5,6], [7,8,9], [1,4,7], 
+                          //[2,5,8], [3,6,9], [1,5,9], [3,5,7]];
+
 const updateSquare = (square) => {
   if (square.innerHTML === '') {
     square.innerHTML = currentPlayer;
@@ -14,8 +21,44 @@ const updateSquare = (square) => {
     return;
   };
   // end game scenarios win/tie
-  console.log('square.innerHTML', square.innerHTML);
+//  console.log('square.innerHTML', square.innerHTML);
   displayWhoseTurnItIs(currentPlayer);
+};
+
+const determineEndGame = () => {
+  //win
+  // if three squares have the same value in a horizontal, vertical, diagonal row;
+  let comboToCompare = [];
+  let idsAndValues = [];
+  squares.forEach( (square) => {
+    let letter = square.innerText;
+    idsAndValues.push(letter);
+  }); 
+  console.log('ids and Values objs Array', idsAndValues);
+  for (winningCombo of winningScenarios) { //[1,2,3]
+    
+    for (var i = 0; i<winningCombo.length; i++) {
+      comboToCompare.push(idsAndValues[i])
+    };
+    console.log('comboToCompare', comboToCompare);
+    if (comboToCompare.every(allXs)) {
+      alert(`Winner Winner Chicken Dinner! Player 1 wins`)
+    } else if (comboToCompare.every(allYs)) {   
+      alert(`Winner Winner Chicken Dinner! Player 2 wins`)
+    } else if (`the board is full`, false){
+      alert(`It's a draw`)
+    } else {
+      return;
+    };
+  };
+
+  //else check for tie 
+    //if all the squares have a value 
+      //then its a tie
+      // alert It;s a tie. If you'd like to play again please hit the reset button 
+};
+const isBoardFull = () => {
+
 };
 /****View****/
 
@@ -40,4 +83,5 @@ const board = document.querySelector(".gameboard")
   .addEventListener("click", (event)=> {
     const square = event.target;
     updateSquare(square);
+    determineEndGame();
   })
